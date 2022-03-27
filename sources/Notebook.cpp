@@ -2,13 +2,13 @@
 #include <map> 
 
 
-constexpr unsigned int MAX_ROW_LEN = 101;
+constexpr unsigned int MAX_ROW_LEN = 100;
 constexpr unsigned int MIN_CHAR_SIGN = 32;
 constexpr unsigned int MAX_CHAR_SIGN = 126;
 
 namespace ariel {
      void minusValuesCheck (int const & page , int const & row , int const & col,string const & str);
-   void minusValuesCheck (int const & page , int const & row , int const & col, int const & length  );
+   void minusValuesCheckLen (int const & page , int const & row , int const & col, int const & length , Direction dir);
 
 
     Notebook::Notebook(){
@@ -86,7 +86,7 @@ namespace ariel {
     
     }
     void Notebook::erase( int page, int row, int col, Direction dir, int length) {
-        minusValuesCheck(page,row,col,length); 
+        minusValuesCheckLen(page,row,col,length,dir); 
         string t ; 
         if (this->notebook.find(page) == notebook.end()){ 
             map <int ,string> pageOfbook ;
@@ -119,7 +119,7 @@ namespace ariel {
 
     }
     string Notebook::read(int page, int row, int col, Direction dir, int length) {
-    minusValuesCheck(page,row,col,length);
+    minusValuesCheckLen(page,row,col,length,dir);
      string resulat; 
     if ( this->notebook.find(page) != notebook.end()){
         if (dir == Direction::Horizontal ){ 
@@ -157,6 +157,12 @@ namespace ariel {
         if ( page < 0 ){
         throw runtime_error("no negative page !"); 
         }
+   
+        if (this->notebook.find(page) == notebook.end()){ 
+            cout << "the page " << page  << "is empty " << endl ;
+            return;
+        }
+     
         map <int ,string> rows = notebook.at(page); 
         for(auto const & row : rows){
         cout << row.second << endl ; 
@@ -170,12 +176,12 @@ namespace ariel {
     
 
     } 
-    void minusValuesCheck (int const & page , int const & row , int const & col, int const & length  ){
-         if (page < 0 || row < 0 || col < 0 || length < 0  ){ 
+    void minusValuesCheckLen (int const & page , int const & row , int const & col, int const & length , Direction dir){
+         if (page < 0 || row < 0 || col < 0 || length < 0  || col >=MAX_ROW_LEN){ 
         throw runtime_error ( "no nagetive values on bored !!"); 
     }
 
-        if (MAX_ROW_LEN < col+length ){
+        if (MAX_ROW_LEN < col+length && dir == Direction::Horizontal ){
             throw runtime_error("cannot overflow the notebook ! "); 
         }
     } 
