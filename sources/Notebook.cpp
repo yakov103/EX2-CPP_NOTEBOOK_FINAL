@@ -2,9 +2,10 @@
 #include <map> 
 
 
-constexpr unsigned int MAX_ROW_LEN = 100;
-constexpr unsigned int MIN_CHAR_SIGN = 32; // MIN CHAR that pritable
-constexpr unsigned int MAX_CHAR_SIGN = 126; // MAX CHAR that printae 
+constexpr unsigned int MAX_ROW_LEN = 100; // becuase lane cannot have more than 100 chars 
+constexpr unsigned int MIN_CHAR_SIGN = 32;// min char that printable 
+constexpr unsigned int MAX_CHAR_SIGN = 126;// max char that pritable 
+
 
 namespace ariel {
      void minusValuesCheck (int const & page , int const & row , int const & col,string const & str);
@@ -168,7 +169,7 @@ namespace ariel {
         cout << row.second << endl ; 
         }
     }
-
+    // check if invalid inputs came from the user  
     void minusValuesCheck (int const & page , int const & row , int const & col,string const & str ){
     if (page < 0 || row < 0 || col < 0 ){ 
         throw runtime_error ( "no nagetive values on bored !!"); 
