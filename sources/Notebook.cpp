@@ -3,8 +3,8 @@
 
 
 constexpr unsigned int MAX_ROW_LEN = 100;
-constexpr unsigned int MIN_CHAR_SIGN = 32;
-constexpr unsigned int MAX_CHAR_SIGN = 126;
+constexpr unsigned int MIN_CHAR_SIGN = 32; // MIN CHAR that pritable
+constexpr unsigned int MAX_CHAR_SIGN = 126; // MAX CHAR that printae 
 
 namespace ariel {
      void minusValuesCheck (int const & page , int const & row , int const & col,string const & str);
